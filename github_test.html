@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head><title>Test</title><style>
+/* =========================================
+   CINEMATIC GLASS DESIGN SYSTEM
+   ========================================= */
+body.cinematic-glass-theme {
+    background-color: #050508 !important;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 40%) !important;
+    background-attachment: fixed !important;
+    color: #f8fafc !important;
+}
+
+.cinematic-glass-theme .card, 
+.cinematic-glass-theme .panel, 
+.cinematic-glass-theme .glass-panel, 
+.cinematic-glass-theme .navbar, 
+.cinematic-glass-theme .nav, 
+.cinematic-glass-theme footer,
+.cinematic-glass-theme .footer,
+.cinematic-glass-theme .product-card,
+.cinematic-glass-theme .service-card,
+.cinematic-glass-theme .feature-card,
+.cinematic-glass-theme .stat-card,
+.cinematic-glass-theme .modal-content,
+.cinematic-glass-theme .about-image {
+    background: rgba(15, 15, 25, 0.55) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+    border-radius: 16px !important;
+    color: #f1f5f9 !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+
+.cinematic-glass-theme .card:hover, 
+.cinematic-glass-theme .product-card:hover, 
+.cinematic-glass-theme .service-card:hover, 
+.cinematic-glass-theme .feature-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.25) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.cinematic-glass-theme h1, 
+.cinematic-glass-theme h2, 
+.cinematic-glass-theme h3,
+.cinematic-glass-theme h4,
+.cinematic-glass-theme h5,
+.cinematic-glass-theme h6 {
+    color: #ffffff !important;
+    letter-spacing: -0.02em !important;
+}
+
+.cinematic-glass-theme p, 
+.cinematic-glass-theme span, 
+.cinematic-glass-theme a,
+.cinematic-glass-theme li {
+    color: #cbd5e1 !important;
+}
+
+.cinematic-glass-theme button, 
+.cinematic-glass-theme .btn,
+.cinematic-glass-theme .btn-primary {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(168, 85, 247, 0.8)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #fff !important;
+    backdrop-filter: blur(8px) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2) !important;
+    transition: all 0.3s ease !important;
+}
+
+.cinematic-glass-theme button:hover, 
+.cinematic-glass-theme .btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.cinematic-glass-theme input, 
+.cinematic-glass-theme textarea, 
+.cinematic-glass-theme select {
+    background: rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+}
+.cinematic-glass-theme input:focus, 
+.cinematic-glass-theme textarea:focus {
+    border-color: rgba(99, 102, 241, 0.5) !important;
+    outline: none !important;
+}
+</style>
+</head>
+<body class="cinematic-glass-theme">
+<h1>Testing</h1>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+var charts = [];
+
+function showTab(tab) {}
+
+function parseList(str) {
+    if (!str) return [];
+    return str.split(',').map(function(x) { return parseFloat(x.trim()); }).filter(function(x) { return !isNaN(x); });
+}
+
+function mean(arr) { return arr.reduce(function(a, b) { return a + b; }, 0) / arr.length; }
+function multiply(a, b) { var result = []; for (var i = 0; i < a.length; i++) { result.push(a[i] * b[i]); } return result; }
+function add(a, b) { var result = []; for (var i = 0; i < a.length; i++) { result.push(a[i] + b[i]); } return result; }
+function subtract(a, b) { var result = []; for (var i = 0; i < a.length; i++) { result.push(a[i] - b[i]); } return result; }
+function dot(a, b) { var sum = 0; for (var i = 0; i < a.length; i++) { sum += a[i] * b[i]; } return sum; }
+function transpose(matrix) { var result = []; for (var i = 0; i < matrix[0].length; i++) { var row = []; for (var j = 0; j < matrix.length; j++) { row.push(matrix[j][i]); } result.push(row); } return result; }
+function invert(matrix) { try { var n = matrix.length; var augmented = JSON.parse(JSON.stringify(matrix)); for (var i = 0; i < n; i++) { for (var j = 0; j < n; j++) { augmented[i].push(i === j ? 1 : 0); } } for (var i = 0; i < n; i++) { var pivot = augmented[i][i]; if (Math.abs(pivot) < 1e-10) { var found = false; for (var r = i + 1; r < n; r++) { if (Math.abs(augmented[r][i]) > 1e-10) { var temp = augmented[i]; augmented[i] = augmented[r]; augmented[r] = temp; pivot = augmented[i][i]; found = true; break; } } if (!found) return []; } for (var j = 0; j < 2 * n; j++) { augmented[i][j] /= pivot; } for (var k = 0; k < n; k++) { if (k !== i) { var factor = augmented[k][i]; for (var j = 0; j < 2 * n; j++) { augmented[k][j] -= factor * augmented[i][j]; } } } } var result = []; for (var i = 0; i < n; i++) { result.push(augmented[i].slice(n)); } return result; } catch (e) { return []; } }
+function matrixMultiply(a, b) { var result = []; var bt = transpose(b); for (var i = 0; i < a.length; i++) { var row = []; for (var j = 0; j < bt.length; j++) { row.push(dot(a[i], bt[j])); } result.push(row); } return result; }
+
+function solveLinearSystem(X, y) {
+    var n = X.length;
+    var k = X[0].length;
+    var Xt = transpose(X);
+    var XtX = matrixMultiply(Xt, X);
+    var Xty = [];
+    for (var i = 0; i < k; i++) { Xty.push(dot(Xt[i], y)); }
+    var A = JSON.parse(JSON.stringify(XtX));
+    var b = Xty.slice();
+    n = k;
+    for (var i = 0; i < n; i++) {
+        var maxRow = i;
+        for (var r = i + 1; r < n; r++) { if (Math.abs(A[r][i]) > Math.abs(A[maxRow][i])) maxRow = r; }
+        var temp = A[i]; A[i] = A[maxRow]; A[maxRow] = temp;
+        var tempB = b[i]; b[i] = b[maxRow]; b[maxRow] = tempB;
+        if (Math.abs(A[i][i]) < 1e-10) { b[i] = 0; continue; }
+        for (var r = i + 1; r < n; r++) {
+            var factor = A[r][i] / A[i][i];
+            for (var c = i; c < n; c++) A[r][c] -= factor * A[i][c];
+            b[r] -= factor * b[i];
+        }
+    }
+    var x = new Array(n).fill(0);
+    for (var i = n - 1; i >= 0; i--) {
+        if (Math.abs(A[i][i]) < 1e-10) continue;
+        x[i] = b[i];
+        for (var r = i + 1; r < n; r++) x[i] -= A[i][r] * x[r];
+        x[i] /= A[i][i];
+    }
+    return x;
+}
+
+function linearRegression(X, y) { return solveLinearSystem(X, y); }
+function predictMulti(X, beta) { var result = []; for (var i = 0; i < X.length; i++) { var sum = 0; for (var j = 0; j < X[i].length; j++) { sum += X[i][j] * beta[j]; } result.push(sum); } return result; }
+function rmse(actual, predicted) { var sum = 0; for (var i = 0; i < actual.length; i++) { sum += Math.pow(actual[i] - predicted[i], 2); } return Math.sqrt(sum / actual.length); }
+function updateSourceOptions() {}
+function fetchWeather() {}
+
+function predict() {
+    try {
+        var years = parseList(document.getElementById('years').value);
+        var rainfall = parseList(document.getElementById('rainfall').value);
+        var avgTemp = parseList(document.getElementById('avg_temp').value);
+        var maxTemp = parseList(document.getElementById('max_temp').value);
+        var surma = parseList(document.getElementById('surma').value);
+        var kushiyara = parseList(document.getElementById('kushiyara').value);
+        var predictYear = parseInt(document.getElementById('predict_year').value);
+        var threshSurma = parseFloat(document.getElementById('threshold_surma').value);
+        var threshKushi = parseFloat(document.getElementById('threshold_kushi').value);
+        
+        console.log('years:', years);
+        console.log('rainfall:', rainfall);
+        console.log('predictYear:', predictYear);
+        
+        if (years.length < 2 || rainfall.length < 2) {
+            alert('Please enter at least 2 years of data');
+            return;
+        }
+        
+        var temp_increase = 0.03;
+        var lastIdx = years.length - 1;
+        var firstIdx = 0;
+        var slopeR = (rainfall[lastIdx] - rainfall[firstIdx]) / (years[lastIdx] - years[firstIdx]);
+        var slopeTavg = (avgTemp[lastIdx] - avgTemp[firstIdx]) / (years[lastIdx] - years[firstIdx]);
+        var slopeTmax = (maxTemp[lastIdx] - maxTemp[firstIdx]) / (years[lastIdx] - years[firstIdx]);
+        
+        var R_pred = rainfall[lastIdx] + slopeR * (predictYear - years[lastIdx]);
+        var Tavg_pred = avgTemp[lastIdx] + slopeTavg * (predictYear - years[lastIdx]) + temp_increase;
+        var Tmax_pred = maxTemp[lastIdx] + slopeTmax * (predictYear - years[lastIdx]) + temp_increase;
+        
+        console.log('R_pred:', R_pred);
+        
+        R_pred = Math.round(R_pred * 100) / 100;
+        Tavg_pred = Math.round(Tavg_pred * 100) / 100;
+        Tmax_pred = Math.round(Tmax_pred * 100) / 100;
+        
+        var X = [];
+        for (var i = 0; i < rainfall.length; i++) {
+            X.push([1, rainfall[i], avgTemp[i], maxTemp[i]]);
+        }
+        
+        console.log('X:', X);
+        
+        var beta_s = linearRegression(X, surma);
+        var beta_k = linearRegression(X, kushiyara);
+        
+        console.log('beta_s:', beta_s);
+        
+        var X_pred = [[1, R_pred, Tavg_pred, Tmax_pred]];
+        var surma_predicted = Math.round(predictMulti(X_pred, beta_s)[0] * 100) / 100;
+        var kushiyara_predicted = Math.round(predictMulti(X_pred, beta_k)[0] * 100) / 100;
+        
+        console.log('surma_predicted:', surma_predicted);
+        console.log('kushiyara_predicted:', kushiyara_predicted);
+        
+        alert('Success! Surma: ' + surma_predicted + 'm, Kushiyara: ' + kushiyara_predicted + 'm');
+    } catch(e) {
+        alert('Error: ' + e.message);
+        console.error(e);
+    }
+}
+</script>
+
+<input type="hidden" id="years" value="2016,2017,2018,2019,2020,2021,2022,2023,2024,2025">
+<input type="hidden" id="rainfall" value="4210, 5120, 3950, 4480, 4100, 3850, 5430, 4320, 5080, 4250">
+<input type="hidden" id="avg_temp" value="25.8, 26.1, 25.9, 26.0, 25.7, 26.3, 26.5, 26.8, 26.4, 27.1">
+<input type="hidden" id="max_temp" value="34.5, 35.0, 34.2, 34.2, 34.0, 36.1, 35.8, 37.2, 35.4, 36.8">
+<input type="hidden" id="surma" value="11.45, 11.95, 10.80, 11.35, 11.10, 10.50, 13.00, 11.05, 12.45, 11.15">
+<input type="hidden" id="kushiyara" value="13.20, 14.10, 12.85, 13.50, 13.15, 12.40, 17.57, 13.10, 15.20, 13.35">
+<input type="hidden" id="predict_year" value="2026">
+<input type="hidden" id="threshold_surma" value="13">
+<input type="hidden" id="threshold_kushi" value="15">
+
+<button onclick="predict()">TEST PREDICT</button>
+</body>
+</html>
+
